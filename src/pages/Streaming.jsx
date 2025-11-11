@@ -1,4 +1,6 @@
 import { motion } from 'framer-motion'
+import GlowCard from '../components/GlowCard'
+import SectionHeader from '../components/SectionHeader'
 
 const items = [
   { title: 'AI Recommendations', desc: 'Context-aware, privacy-preserving recommendations tuned for energy efficiency.' },
@@ -8,19 +10,21 @@ const items = [
 
 export default function Streaming(){
   return (
-    <main className="bg-[#0B0B0B] text-white">
+    <main className="bg-transparent text-white">
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <motion.h1 initial={{opacity:0,y:10}} animate={{opacity:1,y:0}} transition={{duration:.6}} className="text-3xl md:text-5xl font-semibold" style={{fontFamily:'Space Grotesk'}}>Streaming</motion.h1>
-        <p className="mt-4 text-zinc-300 max-w-2xl">A next-gen platform that blends personalization with sustainability.</p>
+        <SectionHeader eyebrow="Streaming" title="Immersive. Efficient. Planet-positive." subtitle="A next-gen platform that blends personalization with sustainability." />
 
         <div className="mt-10 grid md:grid-cols-3 gap-6">
           {items.map((it,i) => (
-            <motion.div key={i} initial={{opacity:0,y:12}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{delay:i*0.1,duration:.6}} className="p-6 rounded-xl bg-white/5 border border-white/10">
-              <h3 className="text-xl font-medium" style={{fontFamily:'Space Grotesk'}}>{it.title}</h3>
-              <p className="mt-2 text-zinc-300">{it.desc}</p>
-            </motion.div>
+            <GlowCard key={i} title={it.title} desc={it.desc} delay={i*0.05} />
           ))}
         </div>
+
+        <motion.div initial={{opacity:0, y:20}} whileInView={{opacity:1, y:0}} viewport={{once:true}} transition={{duration:.7, delay:.1}} className="mt-14 rounded-2xl overflow-hidden border border-white/10 bg-white/5">
+          <div className="aspect-video w-full bg-[radial-gradient(circle_at_center,_rgba(0,255,140,0.18),_transparent_60%)] flex items-center justify-center">
+            <span className="text-zinc-300">Demo player area</span>
+          </div>
+        </motion.div>
       </section>
     </main>
   )

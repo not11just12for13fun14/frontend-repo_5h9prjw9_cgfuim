@@ -1,13 +1,19 @@
 import Spline from '@splinetool/react-spline'
-import { motion } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 
 export default function Hero() {
+  const ref = useRef(null)
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
+  const y = useTransform(scrollYProgress, [0, 1], [0, -120])
+  const opacity = useTransform(scrollYProgress, [0, 1], [1, 0.5])
+
   return (
-    <section className="relative h-[80vh] md:h-[90vh] w-full overflow-hidden">
-      <div className="absolute inset-0">
+    <section ref={ref} className="relative h-[80vh] md:h-[90vh] w-full overflow-hidden">
+      <motion.div style={{ y, opacity }} className="absolute inset-0">
         <Spline scene="https://prod.spline.design/6tUXqVcUA0xgJugv/scene.splinecode" style={{ width: '100%', height: '100%' }} />
-      </div>
+      </motion.div>
 
       <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black/90 pointer-events-none" />
 
